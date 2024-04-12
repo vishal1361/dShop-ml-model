@@ -14,6 +14,7 @@ distro-info===1.1build1
 exceptiongroup==1.2.0
 fastapi==0.110.1
 fonttools==4.51.0
+gunicorn==21.2.0
 h11==0.14.0
 httplib2==0.20.2
 idna==3.7
