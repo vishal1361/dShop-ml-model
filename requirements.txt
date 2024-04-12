@@ -39,7 +39,9 @@ pydantic_core==2.18.1
 PyGObject==3.42.1
 PyJWT==2.3.0
 pyparsing==2.4.7
-python-apt==2.4.0+ubuntu3
+--index-url https://pypi.python.org/simple/
+-e git+https://salsa.debian.org/apt-team/python-apt.git#egg=python-apt
+-e .
 python-dateutil==2.9.0.post0
 pytz==2024.1
 PyYAML==5.4.1
