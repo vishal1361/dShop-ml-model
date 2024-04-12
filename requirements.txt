@@ -33,12 +33,13 @@ oauthlib==3.2.0
 packaging==24.0
 pandas==2.2.2
 pillow==10.3.0
+pycairo==1.26.0
 pydantic==2.7.0
 pydantic_core==2.18.1
 PyGObject==3.42.1
 PyJWT==2.3.0
 pyparsing==2.4.7
-python-apt==2.4.0+ubuntu1
+python-apt==2.4.0+ubuntu3
 python-dateutil==2.9.0.post0
 pytz==2024.1
 PyYAML==5.4.1
