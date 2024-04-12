@@ -51,7 +51,6 @@ starlette==0.37.2
 surprise==0.1
 typing_extensions==4.11.0
 tzdata==2024.1
-ubuntu-advantage-tools==8001
 ufw==0.36.1
 unattended-upgrades==0.1
 unicorn==2.0.1.post1
