@@ -32,7 +32,7 @@ try:
 except FileNotFoundError:
     raise RuntimeError("One or more pickle files not found. Please check the file paths.")
 
-@app.get('/recommendations', response_model=str, tags=['Recommendations'])
+@app.get('/recommendations', response_model=List[str], tags=['Recommendations'])
 def recommend_using_get_call(userId: str = Query(..., description="User ID for which recommendations are requested"),
                              count: int = Query(10, description="Number of recommendations to return"),
                              model: int = Query(1, description="Model number to use for recommendations"),
@@ -40,7 +40,7 @@ def recommend_using_get_call(userId: str = Query(..., description="User ID for w
     """
     Get recommendations based on user reputation.
     """
-    # Check if user_id is valid (you may have your own validation logic)
+    # Check if user_id is valid
     if not userId:
         raise HTTPException(status_code=400, detail="Invalid user ID")
 
@@ -55,11 +55,12 @@ def recommend_using_get_call(userId: str = Query(..., description="User ID for w
     # Select model based on user's choice
     selected_model = model_1 if model == 1 else model_2
 
-    # Call the method to get recommendations from rep_rec_model
+    # Call the method to get recommendations
     recommendations = weighted_borda_count_df(selected_model, loaded_dataframe, userId, count, weight/10)
     # Convert the list of recommendations to a single string separated by commas
     recommendations_str = ",".join(recommendations)
-    return recommendations_str
+    # Return the list containing the string of recommendations
+    return [recommendations_str]
 
 @app.post('/recommendations', response_model=List[str], summary="Get recommendations based on user reputation")
 def recommend(recommendation_request: RecommendationRequest):
