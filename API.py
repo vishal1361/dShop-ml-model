@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.params import Query
 from pydantic import BaseModel
 import pickle
 import pandas as pd
@@ -30,6 +31,33 @@ try:
 
 except FileNotFoundError:
     raise RuntimeError("One or more pickle files not found. Please check the file paths.")
+
+@app.get('/recommendations', response_model=List[str], tags=['Recommendations'])
+def recommend_using_get_call(userId: str = Query(..., description="User ID for which recommendations are requested"),
+              count: int = Query(10, description="Number of recommendations to return"),
+              model: int = Query(1, description="Model number to use for recommendations"),
+              weight: float = Query(0.5, description="Weight to apply to the recommendations")):
+    """
+    Get recommendations based on user reputation.
+    """
+    # Check if user_id is valid (you may have your own validation logic)
+    if not userId:
+        raise HTTPException(status_code=400, detail="Invalid user ID")
+
+    # Placeholder for model validation
+    if model not in [1, 2]:
+        raise HTTPException(status_code=400, detail="Invalid model number")
+
+    # Placeholder for weight validation
+    if weight <= 0:
+        raise HTTPException(status_code=400, detail="Weight must be a positive integer")
+
+    # Select model based on user's choice
+    selected_model = model_1 if model == 1 else model_2
+
+    # Call the method to get recommendations from rep_rec_model
+    recommendations = weighted_borda_count_df(selected_model, loaded_dataframe, userId, count, weight/10)
+    return recommendations
 
 @app.post('/recommendations', response_model=List[str], summary="Get recommendations based on user reputation")
 def recommend(recommendation_request: RecommendationRequest):
