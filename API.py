@@ -57,7 +57,9 @@ def recommend_using_get_call(userId: str = Query(..., description="User ID for w
 
     # Call the method to get recommendations from rep_rec_model
     recommendations = weighted_borda_count_df(selected_model, loaded_dataframe, userId, count, weight/10)
-    return recommendations
+    # Convert the list of recommendations to a single string separated by commas
+    recommendations_str = ",".join(recommendations)
+    return recommendations_str
 
 @app.post('/recommendations', response_model=List[str], summary="Get recommendations based on user reputation")
 def recommend(recommendation_request: RecommendationRequest):
