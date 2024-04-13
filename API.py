@@ -32,11 +32,11 @@ try:
 except FileNotFoundError:
     raise RuntimeError("One or more pickle files not found. Please check the file paths.")
 
-@app.get('/recommendations', response_model=List[str], tags=['Recommendations'])
+@app.get('/recommendations', response_model=str, tags=['Recommendations'])
 def recommend_using_get_call(userId: str = Query(..., description="User ID for which recommendations are requested"),
-              count: int = Query(10, description="Number of recommendations to return"),
-              model: int = Query(1, description="Model number to use for recommendations"),
-              weight: float = Query(0.5, description="Weight to apply to the recommendations")):
+                             count: int = Query(10, description="Number of recommendations to return"),
+                             model: int = Query(1, description="Model number to use for recommendations"),
+                             weight: float = Query(0.5, description="Weight to apply to the recommendations")):
     """
     Get recommendations based on user reputation.
     """
