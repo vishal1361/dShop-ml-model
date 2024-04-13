@@ -42,7 +42,6 @@ pycairo==1.26.0
 pydantic==2.7.0
 pydantic_core==2.18.1
 Pygments==2.11.2
-PyGObject==3.42.1
 PyJWT==2.3.0
 pyparsing==2.4.7
 python-dateutil==2.9.0.post0
